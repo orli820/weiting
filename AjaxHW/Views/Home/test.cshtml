@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewData["Title"] = "test";
+}
+
+<h1>test</h1>
+
+<head>
+    <style>
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%) scale(0);
+            transition: 200ms ease-in-out;
+            border: 1px solid black;
+            border-radius: 10%;
+            z-index: 10;
+            background-color: white;
+            width: 500px;
+            max-width: 80%;
+        }
+
+            .modal.active {
+                transform: translate(-50%,-50%) scale(1);
+            }
+
+        .moda-headers {
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid black;
+        }
+
+            .modal-headers titles {
+                font-size: 1.25rem;
+                font-weight: bold;
+            }
+
+            .modal-headers .close-btn {
+                cursor: pointer;
+                border: none;
+                outline: none;
+                background: none;
+                font-size: 1.25rem;
+                font-weight: bold;
+            }
+
+        .modal-bodys {
+            padding: 10px 15px;
+            color: black;
+        }
+
+        #overlays {
+            position: fixed;
+            opacity:0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: yellow;
+            pointer-events: none;
+        }
+
+            #overlays.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+        button {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <button data-modal-target="#modal" id="1">open Modal</button>
+    <div class="modal" id="modal">
+        <div class="modal-headers">
+            <div class="titles" style="color:black">Ex Modal</div>
+            <button data-close-button class="close-btn" id="2"></button>
+        </div>
+        <div class="modal-bodys">
+            If you have used the web anytime in the last 5 years then you have most definitely run into an abundance of popups, also known as modals, which are quickly becoming one of the most popular components in web development.
+
+            In this video I will cover how to create a simple modal that animates in on button click, and fades out when the modal is closed. This modal is also able to be closed by clicking anywhere outside the modal which is something most tutorial don't cover. Lastly, this modal is setup in a way that it is incredibly easy for you to customize it to the needs of your exact website.
+
+        </div>
+
+    </div>
+    <div id="overlays"></div>
+</body>
+
+@section Scripts{
+    <script>
+        const openModalBtn = document.querySelector('#1')
+        const closeModalBtn = document.querySelector('#2')
+        const overlay = document.querySelector('#overlays')
+        const oo = document.querySelector('#modal')
+
+        openModalBtn.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.querySelector("#modal")
+                openModal(modal)
+            })
+        
+    })
+
+    function openModal(modal) {
+        if (modal == null) return
+        //const list = document.getElementById('modal').classList();
+        //list.add();
+        oo.addEventListener('active', () => {
+
+        })
+        modal.classList.add('active')
+        overlay.classList.add('active')
+    }
+    </script>
+}

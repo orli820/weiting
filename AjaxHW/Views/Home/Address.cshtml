@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<select id="select1"></select>
+<select id="select2"></select>
+<select id="select3"></select>
+
+@section Scripts{
+    <script>
+        const selCity = document.querySelector("#select1");
+        const selSite = document.querySelector("#select2");
+        const selRoad = document.querySelector("#select3");
+
+        async function formload() {
+            await fillcity();
+            await fillsite();
+            await fillroad();
+        }
+
+        async function fillcity() {
+            let res = await fetch("@Url.Content("~/api/city")");
+            let datas = await res.json();
+            datas.forEach(city => { selCity.options.add(new Option(city, city)) });
+        }
+
+        async function fillsite() {
+            let res = await fetch("@Url.Content("~/api/site")" + `?city=${selCity.options[selCity.selectedIndex].value}`);
+            let datas = await res.json();
+            datas.forEach(site => { selSite.options.add(new Option(site, site)) });
+        }
+
+        async function fillroad() {
+            let res = await fetch("@Url.Content("~/api/road")" + `?site=${selSite.options[selSite.selectedIndex].value}`);
+            let datas = await res.json();
+            datas.forEach(road => { selRoad.options.add(new Option(road, road)) });
+        }
+
+        selCity.addEventListener("change", async () => {
+            selSite.options.length = 0;
+            selRoad.options.length = 0;
+            await fillsite();
+            await fillroad();
+        });
+
+        selSite.addEventListener("change", () => {
+            selRoad.options.length = 0;
+            fillroad();
+        });
+
+        formload();
+    </script>
+}

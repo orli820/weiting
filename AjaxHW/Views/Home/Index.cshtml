@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div id="div1">
+
+    </div>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+@section Scripts{
+    <script src="~/js/travel.js"></script>
+    <script>
+        let theDIV = document.getElementById("div1");
+        let text = "";
+        DATAS.forEach(data => {
+            text += `<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${data.Name}</h5>
+    <p class="card-text">${data.Toldescribe}</p>
+    <a href="#" class="card-link">${data.Website}</a>
+  </div>
+</div>`;
+        });
+        theDIV.innerHTML = text;
+    </script>
+}
